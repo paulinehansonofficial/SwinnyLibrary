@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Threading.Tasks;
 using SwinnyAPI.Models;
 
 namespace SwinnyAPI.Controllers
@@ -88,7 +89,7 @@ namespace SwinnyAPI.Controllers
 
         // POST: api/Authors
         [ResponseType(typeof(Author))]
-        public IHttpActionResult PostAuthor(Author author)
+        public async Task<IHttpActionResult> PostAuthor(Author author)
         {
             if (!ModelState.IsValid)
             {
@@ -96,24 +97,17 @@ namespace SwinnyAPI.Controllers
             }
 
             db.Authors.Add(author);
+            await db.SaveChangesAsync();
 
-            try
+            var dto = new AuthorDTO()
             {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (AuthorExists(author.AuthorID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                AuthorID = author.AuthorID,
+                AuthorName = author.AuthorName,
+                AuthorSurname = author.AuthorSurname,
+                TFN = author.TFN
+            };            
 
-            return CreatedAtRoute("DefaultApi", new { id = author.AuthorID }, author);
+            return CreatedAtRoute("DefaultApi", new { id = author.AuthorID }, dto);
         }
 
         // DELETE: api/Authors/5

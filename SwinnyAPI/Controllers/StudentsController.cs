@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Threading.Tasks;
 using System.Web.Http.Description;
 using SwinnyAPI.Models;
 
@@ -89,7 +90,7 @@ namespace SwinnyAPI.Controllers
 
         // POST: api/Students
         [ResponseType(typeof(Student))]
-        public IHttpActionResult PostStudent(Student student)
+        public async Task<IHttpActionResult> PostStudent(Student student)
         {
             if (!ModelState.IsValid)
             {
@@ -97,24 +98,18 @@ namespace SwinnyAPI.Controllers
             }
 
             db.Students.Add(student);
+            await db.SaveChangesAsync();
 
-            try
+            var dto = new StudentDTO()
             {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (StudentExists(student.StudentID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                StudentID = student.StudentID,
+                FirstName = student.FirstName,
+                Surname = student.Surname,
+                Email = student.Email,
+                Mobile = student.Mobile
+            };
 
-            return CreatedAtRoute("DefaultApi", new { id = student.StudentID }, student);
+            return CreatedAtRoute("DefaultApi", new { id = student.StudentID }, dto);
         }
 
         // DELETE: api/Students/5

@@ -11,5 +11,6 @@ namespace SwinnyAPI.Models
         public string Title { get; set; }
         public string YearPublished { get; set; }
         public string AuthorName { get; set; }
+        public string AuthorSurname { get; set; }
     }
 }

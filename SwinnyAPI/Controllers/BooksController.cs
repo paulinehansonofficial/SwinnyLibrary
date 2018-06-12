@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Threading.Tasks;
 using SwinnyAPI.Models;
 
 namespace SwinnyAPI.Controllers
@@ -25,7 +26,8 @@ namespace SwinnyAPI.Controllers
                        Title = b.Title,
                        ISBN = b.ISBN,
                        YearPublished = b.YearPublished,
-                       AuthorName = b.Author.AuthorName + " " + b.Author.AuthorSurname
+                       AuthorName = b.Author.AuthorName,
+                       AuthorSurname = b.Author.AuthorSurname
                    };
         }
 
@@ -44,7 +46,8 @@ namespace SwinnyAPI.Controllers
                 Title = book.Title,
                 ISBN = book.ISBN,
                 YearPublished = book.YearPublished,
-                AuthorName = book.Author.AuthorName + " " + book.Author.AuthorSurname
+                AuthorName = book.Author.AuthorName,
+                AuthorSurname = book.Author.AuthorSurname
             };
 
             return Ok(b);
@@ -87,7 +90,7 @@ namespace SwinnyAPI.Controllers
 
         // POST: api/Books
         [ResponseType(typeof(Book))]
-        public IHttpActionResult PostBook(Book book)
+        public async Task<IHttpActionResult> PostBook(Book book)
         {
             if (!ModelState.IsValid)
             {
@@ -95,24 +98,19 @@ namespace SwinnyAPI.Controllers
             }
 
             db.Books.Add(book);
+            await db.SaveChangesAsync();
 
-            try
+            var dto = new BookDTO()
             {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (BookExists(book.ISBN))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                Title = book.Title,
+                ISBN = book.ISBN,
+                YearPublished = book.YearPublished,
+                AuthorName = book.Author.AuthorName,
+                AuthorSurname = book.Author.AuthorSurname
+                
+            };
 
-            return CreatedAtRoute("DefaultApi", new { id = book.ISBN }, book);
+            return CreatedAtRoute("DefaultApi", new { id = book.ISBN }, dto);
         }
 
         // DELETE: api/Books/5
