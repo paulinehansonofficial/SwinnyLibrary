@@ -28,11 +28,10 @@ namespace SwinnyAPI.Controllers
                        Email = s.Email,
                        Mobile = s.Mobile
                    };
-
         }
 
         // GET: api/Students/5
-        [ResponseType(typeof(Student))]
+        [ResponseType(typeof(StudentDTO))]
         public IHttpActionResult GetStudent(string id)
         {
             Student student = db.Students.Find(id);
@@ -41,7 +40,16 @@ namespace SwinnyAPI.Controllers
                 return NotFound();
             }
 
-            return Ok(student);
+            StudentDTO s = new StudentDTO()
+            {
+                StudentID = student.StudentID,
+                FirstName = student.FirstName,
+                Surname = student.Surname,
+                Email = student.Email,
+                Mobile = student.Mobile
+            };
+
+            return Ok(s);
         }
 
         // PUT: api/Students/5

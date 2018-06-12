@@ -30,16 +30,25 @@ namespace SwinnyAPI.Controllers
         }
 
         // GET: api/Authors/5
-        [ResponseType(typeof(Author))]
+        [ResponseType(typeof(AuthorDTO))]
         public IHttpActionResult GetAuthor(int id)
         {
             Author author = db.Authors.Find(id);
+            
             if (author == null)
             {
                 return NotFound();
             }
 
-            return Ok(author);
+            AuthorDTO a = new AuthorDTO()
+            {
+                AuthorID = author.AuthorID,
+                AuthorName = author.AuthorName,
+                AuthorSurname = author.AuthorSurname,
+                TFN = author.TFN
+            };
+            return Ok(a);
+
         }
 
         // PUT: api/Authors/5

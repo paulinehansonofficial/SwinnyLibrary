@@ -33,6 +33,6 @@ INSERT INTO Book(ISBN, Title, YearPublished, AuthorID) VALUES
 ('978-3-16-148410-0', 'Relationships with Databases, the Ins and outs', '1970', 32567),
 ('978-3-16-148410-1', 'Normalisation, how to make a database geek fit in', '1970', 32567),
 ('978-3-16-148410-2', 'TCP/IP, the protocol for the masses', '1970', 76543),
-('978-3-16-148410-3', 'The Man, the Bombe, and the Enigma', '1970', 12345);
+('978-3-16-148410-3', 'The Man, the Bombe, the Enigma', '1970', 12345);
 
 END;

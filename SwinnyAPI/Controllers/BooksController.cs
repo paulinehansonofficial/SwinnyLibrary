@@ -30,7 +30,7 @@ namespace SwinnyAPI.Controllers
         }
 
         // GET: api/Books/5
-        [ResponseType(typeof(Book))]
+        [ResponseType(typeof(BookDTO))]
         public IHttpActionResult GetBook(string id)
         {
             Book book = db.Books.Find(id);
@@ -39,7 +39,15 @@ namespace SwinnyAPI.Controllers
                 return NotFound();
             }
 
-            return Ok(book);
+            BookDTO b = new BookDTO()
+            {
+                Title = book.Title,
+                ISBN = book.ISBN,
+                YearPublished = book.YearPublished,
+                AuthorName = book.Author.AuthorName + " " + book.Author.AuthorSurname
+            };
+
+            return Ok(b);
         }
 
         // PUT: api/Books/5
