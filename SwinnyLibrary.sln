@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SwinnyDB", "SwinnyDB\SwinnyDB.sqlproj", "{83959B3A-3415-4AF0-A313-07DF886F6207}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwinnyAPI", "SwinnyAPI\SwinnyAPI.csproj", "{AE630201-1E59-4053-A5F6-BDF6BA21BA4C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{83959B3A-3415-4AF0-A313-07DF886F6207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83959B3A-3415-4AF0-A313-07DF886F6207}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83959B3A-3415-4AF0-A313-07DF886F6207}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{83959B3A-3415-4AF0-A313-07DF886F6207}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83959B3A-3415-4AF0-A313-07DF886F6207}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83959B3A-3415-4AF0-A313-07DF886F6207}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{AE630201-1E59-4053-A5F6-BDF6BA21BA4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE630201-1E59-4053-A5F6-BDF6BA21BA4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE630201-1E59-4053-A5F6-BDF6BA21BA4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE630201-1E59-4053-A5F6-BDF6BA21BA4C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61BB8FD2-A4B1-4429-B30E-91510967070C}
+	EndGlobalSection
+EndGlobal
